@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Hi-end-Systems-Test-Task
+  datasource:
+    username: postgres
+    password: root
+    url: "jdbc:postgresql://localhost:5432/testtask"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+testtask:
+  jwt:
+    secret: c3VwZXJzZWNyZXRzdHJpbmdmb3Jqd3RnZW5lcmF0aW9u
+    lifetime: 3600
+    issuer: testtask
