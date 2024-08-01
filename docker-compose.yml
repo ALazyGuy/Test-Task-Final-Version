@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: ./Hi-end-Systems-Test-Task/
+    container_name: api
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/testtask
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres
+    build:
+      context: ./database/
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=testtask
+    ports:
+      - "5432:5432"
