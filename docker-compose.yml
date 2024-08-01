@@ -3,6 +3,7 @@ version: '3.8'
 services:
   api:
     image: 'docker-spring-boot-postgres:latest'
+    restart: always
     build:
       context: ./Hi-end-Systems-Test-Task/
     container_name: api
@@ -18,6 +19,7 @@ services:
       - "8080:8080"
   db:
     image: postgres
+    restart: always
     build:
       context: ./database/
     container_name: db
@@ -27,3 +29,13 @@ services:
       - POSTGRES_DB=testtask
     ports:
       - "5432:5432"
+  ui:
+    image: "nginx:latest"
+    container_name: ui
+    restart: always
+    volumes:
+      - "./Hi-end-Systems-Test-Task-FE:/usr/share/nginx/html"
+    depends_on:
+      - api
+    ports:
+      - "80:80"
